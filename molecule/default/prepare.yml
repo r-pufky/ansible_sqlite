@@ -1,0 +1,10 @@
+---
+- name: 'Default | prepare'
+  hosts: 'all'
+  gather_facts: false
+  tasks:
+    - name: 'Default | prepare | copy testing databases'
+      ansible.builtin.copy:
+        src: 'files/'
+        dest: '/tmp'
+        mode: '0755'

@@ -1,0 +1,38 @@
+---
+###############################################################################
+# SSH Security Optimizations
+###############################################################################
+# Location of sqlite binary.
+#
+# Default: '/usr/bin/sqlite3'
+sqlite_binary: '/usr/bin/sqlite3'
+
+# Enable package installation?
+#
+# Installs sqlite packages before executing commands. Very slow.
+#
+# Default: False.
+sqlite_install: false
+
+# Absolute path to DB.
+#
+# sqlite_sql query is executed against this database.
+#
+# Default: '' (unset).
+sqlite_db: ''
+
+# SQL command to execute.
+#
+# This command is executed via ansible.builtin.command and must be escaped
+# properly (use quote filter).
+#
+# Default: '' (unset).
+sqlite_sql: ''
+
+# Vacuum the database?
+#
+# Does not ensure that other process are not currently using the DB. Occurs
+# before executing any commands (if specified).
+#
+# Default: False.
+sqlite_vacuum: false

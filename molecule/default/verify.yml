@@ -1,0 +1,55 @@
+---
+- name: 'Default | verify | sqlite installed'
+  hosts: 'all'
+  gather_facts: false
+  tasks:
+    - name: 'Default | verify | sqlite installed | gather installed packages'
+      ansible.builtin.package_facts:
+
+    - name: 'Default | verify | sqlite installed | assert packages installed'
+      ansible.builtin.assert:
+        that:
+          - '"sqlite3" in ansible_facts.packages'
+        fail_msg: 'sqlite3 package should be installed.'
+
+- name: 'Default | verify | sqlite query'
+  hosts: 'all'
+  gather_facts: false
+  tasks:
+    - name: 'Default | verify | sqlite query | execute query'
+      ansible.builtin.include_role:
+        name: 'r_pufky.srv.sqlite'
+      vars:
+        sqlite_sql: 'select max(Version) from VersionInfo;'
+        sqlite_db: '/tmp/clean.db'
+        sqlite_vacuum: false
+        sqlite_install: false
+
+    - name: 'Default | verify | sqlite query | assert query results'
+      ansible.builtin.assert:
+        that:
+          - _sqlite_results.stdout == "211"
+        fail_msg: 'SQL query should only return "211".'
+
+- name: 'Default | verify | sqlite vacuum'
+  hosts: 'all'
+  gather_facts: false
+  tasks:
+    - name: 'Default | verify | sqlite vacuum | vacuum dirty db'
+      ansible.builtin.include_role:
+        name: 'r_pufky.srv.sqlite'
+      vars:
+        sqlite_db: '/tmp/dirty.db'
+        sqlite_vacuum: true
+        sqlite_install: false
+
+    - name: 'Default | verify | sqlite vacuum | check db journal'
+      ansible.builtin.stat:
+        path: '/tmp/dirty.db-wal'
+      register: _test_sqlite_dirty_db
+
+    - name: 'Default | verify | sqlite query | assert clean db'
+      ansible.builtin.assert:
+        that:
+          - not _test_sqlite_dirty_db.stat.exists
+        fail_msg: 'SQL journal should have been removed.'
