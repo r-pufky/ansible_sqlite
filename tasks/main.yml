@@ -20,6 +20,9 @@
   when: sqlite_vacuum
 
 - name: 'Query | {{ sqlite_db }} | {{ sqlite_sql }}'  # noqa name[template] extra information required
-  ansible.builtin.command: '{{ sqlite_binary }} "{{ sqlite_db }}" "{{ sqlite_sql }}"'
+  ansible.builtin.command: '{{ sqlite_binary }} "{{ sqlite_db }}" {{ sqlite_sql | quote }}'
+  become: '{{ sqlite_become }}'
+  become_user: '{{ sqlite_become_user }}'
+  failed_when: sqlite_failed_when
   register: _sqlite_results
   changed_when: _sqlite_results.rc not in [100, 101]

@@ -51,7 +51,7 @@ roles/my_custom_role/tasks/task.yml
     sqlite_vacuum: true
 ```
 
-### Install SQLite, execute SQL query, and vacuum database
+### Install SQLite, execute SQL query as root user, and vacuum database
 ``` yaml
 - name: 'Install, query, and vacuum database'
   ansible.builtin.include_role:
@@ -61,6 +61,8 @@ roles/my_custom_role/tasks/task.yml
     sqlite_db: '/tmp/test.db'
     sqlite_vacuum: true
     sqlite_install: true
+    sqlite_become: true
+    sqlite_become_user: 'root'
 
 - name: 'results'
   ansible.builtin.debug:

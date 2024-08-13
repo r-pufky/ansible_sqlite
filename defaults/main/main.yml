@@ -21,14 +21,6 @@ sqlite_install: false
 # Default: '' (unset).
 sqlite_db: ''
 
-# SQL command to execute.
-#
-# This command is executed via ansible.builtin.command and must be escaped
-# properly (use quote filter).
-#
-# Default: '' (unset).
-sqlite_sql: ''
-
 # Vacuum the database?
 #
 # Does not ensure that other process are not currently using the DB. Occurs
@@ -36,3 +28,43 @@ sqlite_sql: ''
 #
 # Default: False.
 sqlite_vacuum: false
+
+# SQL command to execute.
+#
+# This command is executed via ansible.builtin.command and is automatically
+# escaped using ansible.builtin.quote.
+#
+# Default: '' (unset).
+sqlite_sql: ''
+
+# Use elevated privileges when executing SQL query?
+#
+# Execute SQL query with elevated privileges of become_user.
+#
+# Default: False.
+#
+# Reference:
+# * https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_privilege_escalation.html
+sqlite_become: false
+
+# Become user?
+#
+# Execute SQL query with elevated privileges of specified user.
+#
+# Default: '' (disable).
+#
+# Reference:
+# * https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_privilege_escalation.html
+sqlite_become_user: 'root'
+
+# SQL query command failed_when conditional.
+#
+# Execute SQL query with 'failed_when: sqlite_failed_when'. Failed results will
+# halt execution otherwise. In some cases, a failed SQL query is not a critical
+# failure.
+#
+# Default: False (disable).
+#
+# Reference:
+# * https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_error_handling.html#defining-failure
+sqlite_failed_when: false
