@@ -1,4 +1,5 @@
 ---
+# yamllint disable rule:line-length
 - name: 'Default | verify | sqlite installed'
   hosts: 'all'
   gather_facts: false
@@ -28,7 +29,7 @@
     - name: 'Default | verify | sqlite query | assert query results'
       ansible.builtin.assert:
         that:
-          - _sqlite_results.stdout == "211"
+          - _sqlite_sql_results.stdout == "211"
         fail_msg: 'SQL query should only return "211".'
 
 - name: 'Default | verify | sqlite query with become'
@@ -49,7 +50,7 @@
     - name: 'Default | verify | sqlite query with become | assert query results'
       ansible.builtin.assert:
         that:
-          - _sqlite_results.stdout == "211"
+          - _sqlite_sql_results.stdout == "211"
         fail_msg: 'SQL query should only return "211".'
 
 - name: 'Default | verify | sqlite vacuum'

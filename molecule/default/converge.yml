@@ -1,11 +1,8 @@
 ---
 - name: 'Default | converge'
-  hosts: all
-  gather_facts: true
-  tags: 'molecule-idempotence-notest'
+  hosts: 'all'
+  gather_facts: false
   tasks:
-    - name: 'Default | converge | install sqlite'
+    - name: 'Default | converge | apply r_pufky.srv.sqlite'
       ansible.builtin.include_role:
         name: 'r_pufky.srv.sqlite'
-      vars:
-        sqlite_install: true

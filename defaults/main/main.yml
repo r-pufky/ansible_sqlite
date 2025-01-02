@@ -1,7 +1,9 @@
 ---
+# yamllint disable rule:line-length
 ###############################################################################
-# SSH Security Optimizations
+# SQLite Options
 ###############################################################################
+
 # Location of sqlite binary.
 #
 # Default: '/usr/bin/sqlite3'

@@ -13,12 +13,13 @@ Execute SQLite commands.
 After successful execution the following variables are available for further
 manipulation during the same play (standard role variable scope):
 
- Variable        | type | Description
------------------|------|-----------------------------------------
- _sqlite_results | dict | registered return results from command.
+ Variable            | Type | Description
+---------------------|------|-----------------------------------------
+ _sqlite_sql_results | dict | registered return results from command.
 
 ## Dependencies
-N/A
+Part of the [r_pufky.srv](https://github.com/r-pufky/ansible_collection_srv)
+collection.
 
 ## Example Playbook
 Optionally installs, vacuums, then executes SQL commands against a SQLite
@@ -38,7 +39,7 @@ roles/my_custom_role/tasks/task.yml
 
 - name: 'Results'
   ansible.builtin.debug:
-    msg: '{{ _sqlite_results }}'
+    msg: '{{ _sqlite_sql_results }}'
 ```
 
 ### Vacuum Database
@@ -66,25 +67,25 @@ roles/my_custom_role/tasks/task.yml
 
 - name: 'results'
   ansible.builtin.debug:
-    msg: '{{ _sqlite_results }}'
+    msg: '{{ _sqlite_sql_results }}'
 ```
 
-## Unit Testing
-Test framework requires molecule and rootless podman setup.
+## Development
+Configure [environment](https://github.com/r-pufky/ansible_collection_srv/blob/main/docs/dev/environment/README.md)
 
 Run all unit tests:
 ``` bash
 molecule test --all
 ```
 
-## Issues
+### Issues
 Create a bug and provide as much information as possible.
 
 Associate pull requests with a submitted bug.
 
 ## License
 [AGPL-3.0 License](https://www.tldrlegal.com/license/gnu-affero-general-public-license-v3-agpl-3-0)
- [(direct link)](https://github.com/r-pufky/ansible_fonts/blob/main/LICENSE)
+ [(direct link)](https://github.com/r-pufky/ansible_sqlite/blob/main/LICENSE)
 
 ## Author Information
 PGP Fingerprint: [466EEC2B67516C7117C85CE3A0BC35D16698BAB9](https://keys.openpgp.org/vks/v1/by-fingerprint/466EEC2B67516C7117C85CE3A0BC35D16698BAB9)
