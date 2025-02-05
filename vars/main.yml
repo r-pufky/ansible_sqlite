@@ -10,6 +10,9 @@
 sqlite_role_validate_date: '2024-08-13'
 sqlite_role_validate_release: 'bookworm'
 
-# Default packages for sqlite.
+###############################################################################
+# APT Packages
+###############################################################################
+
 sqlite_role_packages:
   - 'sqlite3'
