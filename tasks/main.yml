@@ -21,8 +21,13 @@
   args:
     removes: '{{ sqlite_db }}-wal'
 
-- name: 'Query | {{ sqlite_db }} | {{ sqlite_sql }}'  # noqa name[template] extra information required
-  ansible.builtin.command: '{{ sqlite_binary }} "{{ sqlite_db }}" {{ sqlite_sql | quote }}'
+- name: 'Debug'
+  when: sqlite_debug_query
+  ansible.builtin.debug:
+    msg: '{{ sqlite_binary }} "{{ sqlite_db }}" {{ sqlite_sql | quote if sqlite_quote else sqlite_sql }}'
+
+- name: 'Query | {{ sqlite_db }}'
+  ansible.builtin.command: '{{ sqlite_binary }} "{{ sqlite_db }}" {{ sqlite_sql | quote if sqlite_quote else sqlite_sql }}'
   become: '{{ sqlite_become }}'
   become_user: '{{ sqlite_become_user }}'
   failed_when: sqlite_failed_when

@@ -39,6 +39,13 @@ sqlite_vacuum: false
 # Default: '' (unset).
 sqlite_sql: ''
 
+# Auto-quote SQL command?
+#
+# Disable if there is specific edge cases needed for quoting.
+#
+# Default: True.
+sqlite_quote: true
+
 # Use elevated privileges when executing SQL query?
 #
 # Execute SQL query with elevated privileges of become_user.
@@ -70,3 +77,6 @@ sqlite_become_user: 'root'
 # Reference:
 # * https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_error_handling.html#defining-failure
 sqlite_failed_when: false
+
+# Debug SQL query (write to task). Default: False.
+sqlite_debug_query: false
