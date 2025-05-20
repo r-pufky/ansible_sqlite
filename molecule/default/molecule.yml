@@ -1,6 +1,15 @@
 ---
+###############################################################################
+# Default
+###############################################################################
 # Verify sqlite is installed, a dirty db is cleaned, and a query against a db
 # successfully returns results.
+#
+# Tests:
+# * SQLite packages are installed.
+# * Dirty DB's are cleaned.
+# * Query sucessfully returns results.
+
 dependency:
   name: 'galaxy'
 driver:

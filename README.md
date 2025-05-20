@@ -4,8 +4,6 @@ Execute SQLite commands.
 ## Requirements
 [supported platforms](https://github.com/r-pufky/ansible_sqlite/blob/main/meta/main.yml)
 
-[collections/roles](https://github.com/r-pufky/ansible_sqlite/blob/main/meta/requirements.yml)
-
 ## Role Variables
 [defaults](https://github.com/r-pufky/ansible_sqlite/tree/main/defaults/main/)
 
@@ -18,8 +16,8 @@ manipulation during the same play (standard role variable scope):
  _sqlite_sql_results | dict | registered return results from command.
 
 ## Dependencies
-Part of the [r_pufky.srv](https://github.com/r-pufky/ansible_collection_srv)
-collection.
+**galaxy-ng** roles cannot be used independently. Part of
+[r_pufky.srv](https://github.com/r-pufky/ansible_collection_srv) collection.
 
 ## Example Playbook
 Optionally installs, vacuums, then executes SQL commands against a SQLite

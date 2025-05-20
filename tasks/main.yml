@@ -1,5 +1,4 @@
 ---
-# yamllint disable rule:line-length
 ###############################################################################
 # Execute SQLite command
 ###############################################################################
@@ -10,7 +9,7 @@
 - name: 'Install packages'
   when: sqlite_install
   ansible.builtin.include_role:
-    name: 'r_pufky.srv.apt'
+    name: 'r_pufky.deb.apt'
   vars:
     apt_packages: '{{ sqlite_role_packages }}'
     apt_package_update_cache: true
@@ -24,10 +23,13 @@
 - name: 'Debug'
   when: sqlite_debug_query
   ansible.builtin.debug:
-    msg: '{{ sqlite_binary }} "{{ sqlite_db }}" {{ sqlite_sql | quote if sqlite_quote else sqlite_sql }}'
+    msg: >
+      {{ sqlite_binary }} "{{ sqlite_db }}"
+      {{ sqlite_sql | quote if sqlite_quote else sqlite_sql }}
 
+# Using argv will automatically escape sqlite_quote even if unwanted.
 - name: 'Query | {{ sqlite_db }}'
-  ansible.builtin.command: '{{ sqlite_binary }} "{{ sqlite_db }}" {{ sqlite_sql | quote if sqlite_quote else sqlite_sql }}'
+  ansible.builtin.command: '{{ sqlite_binary }} "{{ sqlite_db }}" {{ sqlite_sql | quote if sqlite_quote else sqlite_sql }}'  # yamllint disable-line rule:line-length
   become: '{{ sqlite_become }}'
   become_user: '{{ sqlite_become_user }}'
   failed_when: sqlite_failed_when
