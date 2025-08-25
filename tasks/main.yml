@@ -23,9 +23,14 @@
 - name: 'Debug'
   when: sqlite_debug_query
   ansible.builtin.debug:
-    msg: >
-      {{ sqlite_binary }} "{{ sqlite_db }}"
-      {{ sqlite_sql | quote if sqlite_quote else sqlite_sql }}
+    msg: |
+      ╭───────────────────────────────────────────────────────────────────╮
+      │                                                                   │
+      │                        Sqlite query debug.                        │
+      │                                                                   │
+      ├───────────────────────────────────────────────────────────────────╯
+      │ {{ sqlite_binary }} "{{ sqlite_db }}"
+      │ {{ sqlite_sql | quote if sqlite_quote else sqlite_sql }}
 
 # Using argv will automatically escape sqlite_quote even if unwanted.
 - name: 'Query | {{ sqlite_db }}'

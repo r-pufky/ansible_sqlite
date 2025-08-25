@@ -27,8 +27,8 @@ provisioner:
       all:
         sqlite_install: true
 platforms:
-  - name: 'sqlite-debian-12-default'
-    image: 'ghcr.io/hifis-net/debian-systemd:12'
+  - name: 'sqlite-debian-13-default'
+    image: 'ghcr.io/hifis-net/debian-systemd:13'
     systemd: 'always'
     volumes:
       - '/sys/fs/cgroup:/sys/fs/cgroup:ro'

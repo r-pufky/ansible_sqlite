@@ -11,7 +11,12 @@
         quiet: true
         that:
           - '"sqlite3" in ansible_facts.packages'
-        fail_msg: '✘ sqlite3 package should be installed.'
+        fail_msg: |
+          ╭───────────────────────────────────────────────────────────────────╮
+          │                                                                   │
+          │               sqlite3 package should be installed.                │
+          │                                                                   │
+          ╰───────────────────────────────────────────────────────────────────╯
 
 - name: 'Default | verify | sqlite query'
   hosts: 'all'
@@ -31,7 +36,12 @@
         quiet: true
         that:
           - _sqlite_sql_results.stdout == "211"
-        fail_msg: '✘ SQL query should only return "211".'
+        fail_msg: |
+          ╭───────────────────────────────────────────────────────────────────╮
+          │                                                                   │
+          │                SQL query should only return "211".                │
+          │                                                                   │
+          ╰───────────────────────────────────────────────────────────────────╯
 
 - name: 'Default | verify | sqlite query with become'
   hosts: 'all'
@@ -54,7 +64,12 @@
         quiet: true
         that:
           - _sqlite_sql_results.stdout == "211"
-        fail_msg: '✘ SQL query should only return "211".'
+        fail_msg: |
+          ╭───────────────────────────────────────────────────────────────────╮
+          │                                                                   │
+          │                SQL query should only return "211".                │
+          │                                                                   │
+          ╰───────────────────────────────────────────────────────────────────╯
 
 - name: 'Default | verify | sqlite vacuum'
   hosts: 'all'
